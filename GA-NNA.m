@@ -15,11 +15,11 @@ function GA_with_NN_and_TSPLIB()
 
     % Prepare CSV output file
     timestamp = string(datetime('now', 'Format', 'yyyyMMdd_HHmmss'));
-    subfolderPath = fullfile('outputs', timestamp+'-GA+NN');
+    subfolderPath = fullfile('outputs', timestamp+'-GA+NNA');
     if ~exist(subfolderPath, 'dir')
         mkdir(subfolderPath);
     end
-    csvFile = fullfile(subfolderPath, 'results_' + timestamp + '-GA+NN.csv');
+    csvFile = fullfile(subfolderPath, 'results_' + timestamp + '-GA+NNA.csv');
     
     % Write CSV header
     header = {'Data', 'NN_Distance', 'GA_Distance', 'Runtime', ...
@@ -62,7 +62,7 @@ function GA_with_NN_and_TSPLIB()
 
         %% Run GA & NN TSP Solver
         tic;
-        [bestRoute, bestDist, nnRoute, nnDist, bestFitnessOverTime, GAParameters] = solverTSP_GA_with_NN(localDist);
+        [bestRoute, bestDist, nnRoute, nnDist, bestFitnessOverTime, GAParameters] = solverTSP_GA_with_NNA(localDist);
         runtime = toc;
 
         % Add depot to the start & end of route
@@ -98,7 +98,7 @@ function GA_with_NN_and_TSPLIB()
 end
 
 %% GA + NN Solver Function
-function [bestRoute, bestDist, nnRoute, nnDist, bestFitnessOverTime, params] = solverTSP_GA_with_NN(distMatrix)
+function [bestRoute, bestDist, nnRoute, nnDist, bestFitnessOverTime, params] = solverTSP_GA_with_NNA(distMatrix)
     numCities = size(distMatrix, 1);
     depot = 1;
     cities = 2:numCities;
